@@ -1,0 +1,82 @@
+#include <iostream>
+#include<stdio.h>
+#include<stdlib.h>
+
+int **Matrice()
+{
+    int c,l;
+    printf("LA SAISIE DE LA MATRICE \n");
+    printf("Entrer le nombre de ligne \n");
+    scanf("%d",&l);
+    printf("Entrer le nombre de colonne \n");
+    scanf("%d",&c);
+    int **M=(int **)malloc(sizeof(int*)*l);
+    for(int i=0;i<l;i++)
+        M[i]=(int*)malloc(sizeof(int)*c);
+    //remplissage
+    for(int i=0;i<l;i++)
+        for(int j=0;j<c;j++)
+    {
+    printf("Entrer la valeur de M[%d][%d] \n",i,j);
+    scanf("%d",&M[i][j]);
+    }
+    //affichage
+        for(int i=0;i<l;i++)
+     {
+        printf("\n");
+        for(int j=0;j<c;j++)
+        {
+            printf("%d\t",M[i][j]);
+        }
+      }
+      return M;
+}
+int *Mot(int taille)
+{
+    int *T = (int *)malloc(sizeof(int)*taille);
+    for(int j=0;j<taille;j++)
+    {
+    printf("Entrer le caractère Num %d \n",j);
+    scanf("%d",&T[j]);
+    }
+    return T;
+}
+int trace(int **M, int *T, int taille)
+{
+    int tr=M[0][T[0]];
+    int cnt=1;
+    while(cnt<taille && tr!=-1)
+    {
+        tr=M[tr][T[cnt]];
+        cnt++;
+    }
+    return tr;
+}
+void reconaissance(int tr)
+{
+
+    if(tr==2) {printf("Mot est reconnu\n");}
+    else {printf("Mot est non reconnu\n");}
+}
+int main()
+{
+   int **M= Matrice();
+   int taille;
+   int test=0;
+   while(test==0)
+   {
+
+
+    printf("\nEntrer le nombre de caractères du mot  \n");
+    scanf("%d",&taille);
+    int *T=Mot(taille);
+    int tr=trace(M,T,taille);
+    reconaissance(tr);
+    printf("\n----------------------------------\n");
+    printf("Pour tester un autre mot tapez 0  \n");
+    scanf("%d",&test);
+    printf("\n----------------------------------\n");
+   }
+    return 0;
+}
+
